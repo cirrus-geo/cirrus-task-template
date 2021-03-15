@@ -18,6 +18,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Initial release
 
-[Unreleased]: https://github.com/cirrus-geo/cirrus-task-template/compare/master...develop
-[v0.2.0]: https://github.com/cirrus-geo/cirrus-lib/cirrus-task-template/v0.4.0...v0.4.1
-[v0.1.0]: https://github.com/cirrus-geo/cirrus/cirrus-task-template/tree/v0.1.0
+[Unreleased]: https://github.com/cirrus-geo/cirrus-task-template/compare/v0.2.0...main
+[v0.2.0]: https://github.com/cirrus-geo/cirrus-task-template/compare/v0.1.0...v0.2.0
+[v0.1.0]: https://github.com/cirrus-geo/cirrus-task-template/tree/v0.1.0
