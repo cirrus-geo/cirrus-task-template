@@ -6,15 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [v0.2.0] - 2021-03-17
+
+### Added
+- `tests/` directory with an example payload
+- `.gitignore` for this project
+
 ### Fixed
-- Fixed flux capacitor
+- Handler is now runnable with the CLI command in the README
 
-## [v0.2.0] - 2197-08-07
-
-### Changed
-- Behavior of flux capacitor is different
-
-## [v0.1.0] - 2196-08-07
+## [v0.1.0] - 2021-03-15
 
 Initial release
 
