@@ -39,7 +39,6 @@ def handler(payload, context={}, local=None):
     # create temporary work directory if not running locally
     tmpdir = mkdtemp() if local is None else local
     outpath = op.join(tmpdir, 'output')
-    print(outpath)
     os.makedirs(outpath, exist_ok=True)
 
     try:
