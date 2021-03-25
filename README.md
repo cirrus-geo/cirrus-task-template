@@ -2,13 +2,36 @@
 
 This repository is a template for creating new Cirrus tasks, either as Lambda functions or as a Batch job.
 
+## Deployment
+
+Include this task in a workflow by including the Lambda deployment package URL or the Docker image name for Batch.
+
+### Lambda
+
+| Version     | Package URL (Lambda)     | Image Name (Batch) |
+| ----------- | ------------------------ | ------------------ |
+| 0.2.0       | https://url/to/zip/file  | org/image:tag      |
+
+## Usage
+
+Configuration parameters are available in the Cirrus payload under `payload['process']['tasks']['<taskname>']`. The following parameters are available:
+
+| Field       | Type     | Description |
+| ----------- | -------- | ----------- |
+| assets      | Map<string, ConvertAsset Object> | **REQUIRED** Dictionary of Asset keys to convert with parameters for each asset |
+| drop_assets | [string] | Asset keys to remove from output STAC Item(s) (Default: [])  |
+
+Additionally this task creates files that will be uploaded as assets using the parameters supplied in `payload['process']['output_options']` (see cirruslib.transfer.upload_item_assets)
+
+## Development
+
 Tasks can be run locally as they include a CLI:
 
 ```
 $ task.py -h
 ```
 
-When run in Cirrus they use the `cirrus` subcommand to pass in the payload s3 location:
+When run in Cirrus the `cirrus` subcommand is used when invoking Batch
 
 ```
 $ task.py cirrus s3://bucket/prefix/payload.json
