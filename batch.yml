@@ -1,0 +1,34 @@
+Resources:
+  MyBatchJob:
+    Type: "AWS::Batch::JobDefinition"
+    Properties:
+      JobDefinitionName: '#{AWS::StackName}-my-batch-job'
+      Type: Container
+      Parameters:
+        url: ""
+      Timeout:
+        AttemptDurationSeconds: 3600
+      ContainerProperties: 
+        Command:
+          - task.py
+          - cirrus
+          - Ref::url
+        Environment:
+          - Name: CIRRUS_LOG_LEVEL
+            Value: ${self:provider.environment.CIRRUS_LOG_LEVEL}
+          - Name: CIRRUS_BUCKET
+            Value: ${self:provider.environment.CIRRUS_BUCKET}
+          - Name: CIRRUS_DATA_BUCKET
+            Value: ${self:provider.environment.CIRRUS_DATA_BUCKET}
+          - Name: CIRRUS_STATE_DB
+            Value: ${self:provider.environment.CIRRUS_STATE_DB}
+          - Name: CIRRUS_STACK
+            Value: ${self:provider.environment.CIRRUS_STACK}
+          - Name: AWS_DEFAULT_REGION
+            Value: ${self:provider.region}
+        Memory: 2000
+        Vcpus: 1
+        Image: 'org/name:tag'
+      RetryStrategy:
+        Attempts: 1
+
