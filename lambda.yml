@@ -1,0 +1,7 @@
+my-task:
+  description: Run my task
+  handler: task.handler
+  memorySize: 128
+  timeout: 15
+  package:
+    artifact: https://url/to/zip/file
