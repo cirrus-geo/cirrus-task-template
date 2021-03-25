@@ -4,13 +4,16 @@ import argparse
 import json
 import logging
 import os
+import os.path as op
 import sys
 from shutil import rmtree
+from tempfile import mkdtemp
+from boto3utils import s3
 
 from cirruslib import Catalog, get_task_logger
 from cirruslib.transfer import download_item_assets, upload_item_assets
 
-from .version import __version__
+from version import __version__
 
 TASK_NAME='task'
 
@@ -33,18 +36,18 @@ def handler(payload, context={}, local=None):
     assert(len(catalog['features']) == 1)
     item = catalog['features'][0]
 
-    # create temporary work directory
+    # create temporary work directory if not running locally
     tmpdir = mkdtemp() if local is None else local
     outpath = op.join(tmpdir, 'output')
-    os.makedirs(outpath)
+    os.makedirs(outpath, exist_ok=True)
 
     try:
         # main logic - replace with own
-        # download asset
-        item = download_item_assets(item, path=tmpdir, assets=['asset1'])
+        # download asset, e.g. a thumbnail
+        item = download_item_assets(item, path=outpath, assets=['thumbnail'])
 
         # do something, e.g. modify asset, create new asset
-        item['assets']['asset2'] = create_new_asset(item)
+        # item['assets']['asset2'] = create_new_asset(item)
 
         # upload new assets
         if local is not None:
@@ -68,7 +71,7 @@ def handler(payload, context={}, local=None):
         logger.error(msg, exc_info=True)
         raise Exception(msg)
     finally:
-        # remove work directory
+        # remove work directory if not running locally
         if local is None:
             logger.debug('Removing work directory %s' % tmpdir)
             rmtree(tmpdir)
@@ -99,7 +102,7 @@ def parse_args(args):
     parser = subparsers.add_parser('cirrus', parents=[pparser], help=h, formatter_class=dhf)
     parser.add_argument('url', help='s3 url to STAC Process Catalog')
 
-    # turn Namespace into dictinary
+    # turn Namespace into dictionary
     pargs = vars(parser0.parse_args(args))
     # only keep keys that are not None
     pargs = {k: v for k, v in pargs.items() if v is not None}

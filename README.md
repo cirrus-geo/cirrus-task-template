@@ -17,7 +17,7 @@ $ task.py cirrus s3://bucket/prefix/payload.json
 While when run locally use the `local` subcommand, specify a local payload, and optionally provide a working directory
 
 ```
-$ task.py local payload.json --workdir test-run/
+$ task.py local tests/payload.json --workdir tests/
 ```
 
 When run locally the handler will not upload assets to s3. It will also not remove the working directory when it completes.
