@@ -14,4 +14,4 @@ RUN \
 ADD . ${HOME}
 
 # Add task to $PATH so AWS Batch can run
-COPY task.py /usr/local/bin
+COPY [ "task.py", "version.py", "/usr/local/bin" ]
