@@ -1,5 +1,7 @@
 # Cirrus Task Template
 
+NOTE - This repo has been archived in favor of [cirrus-task-example](https://github.com/cirrus-geo/cirrus-task-example)
+
 This repository is a template for creating new Cirrus tasks, either as Lambda functions or as a Batch job.
 
 ## Deployment
